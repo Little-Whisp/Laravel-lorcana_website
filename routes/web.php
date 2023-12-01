@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\CategoryController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +16,24 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('main');
+})->name('main');
 
+// Posts Routes
+Route::get('/all-posts', [PostController::class, 'showAllPosts'])->name('all-posts');
 Route::resource('posts', PostController::class);
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
+
+// User Posts Routes
 Route::resource('user-posts', UserPostController::class);
+
+// Categories Routes
 Route::resource('categories', CategoryController::class);
 
+// Authentication Routes
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
+// Home Route
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
