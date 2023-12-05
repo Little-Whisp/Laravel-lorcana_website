@@ -26,14 +26,30 @@ class PostController extends Controller
         // Validate and store post
         // Implement your validation logic based on your requirements
         $request->validate([
-            'title' => 'required|max:255',
+            'name' => 'required|max:255',
+            'detail' => 'required',
             'image' => 'required|mimes:jpg,jpeg,png|max:4096',
             'category_id' => 'required|exists:categories,id',
+            'is_visible' => 'boolean',  // Assuming is_visible is a boolean field
             // Add other fields as needed
         ]);
 
-        Post::create($request->all());
+        // Assuming the 'image' field is a file, handle file upload
+        $imagePath = $request->file('image')->store('post_images', 'public');
 
+        // Create a new Post instance with the validated data
+        $post = new Post([
+            'name' => $request->input('name'),
+            'detail' => $request->input('detail'),
+            'image' => $imagePath,  // Save the file path, adjust if necessary
+            'category_id' => $request->input('category_id'),
+            'is_visible' => $request->has('is_visible'),
+        ]);
+
+        // Save the post to the database
+        $post->save();
+
+        // Redirect back to the home page with a success message
         return redirect()->route('home')->with('success', 'Post created successfully');
     }
 
