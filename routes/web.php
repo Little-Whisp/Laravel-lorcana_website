@@ -16,15 +16,16 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-    return view('main');
-})->name('main');
+    return view('index');
+})->name('index');
+
 
 // Posts Routes
+Route::resource('posts', PostController::class);
 Route::get('/all-posts', [PostController::class, 'showAllPosts'])->name('all-posts');
 Route::resource('posts', PostController::class);
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-
 
 // User Posts Routes
 Route::resource('user-posts', UserPostController::class);

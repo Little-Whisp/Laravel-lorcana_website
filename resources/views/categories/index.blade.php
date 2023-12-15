@@ -1,12 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
+
     <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <h2>All Categories</h2>
-                <a href="{{ route('main') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
+                <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go to Home page</a>
+                <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
                 <a href="{{ route('categories.create') }}" class="btn btn-primary mt-3 ml-3">Create a new category</a>
+
                 @forelse ($categories as $category)
                     <div class="card mb-3">
                         <div class="card-header">{{ $category->name }}</div>

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h2>{{ $post->name }}</h2>
+                <h2>{{ $post->title }}</h2>
                 <div class="card">
                     <div class="card-body">
                         <p>{{ $post->detail }}</p>

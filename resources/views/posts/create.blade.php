@@ -5,11 +5,13 @@
         <div class="row">
             <div class="col-md-8">
                 <h2>Create a New Post</h2>
+                <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go to Home page</a>
+
                 <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Post Title</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="title">Post Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="form-group">
                         <label for="detail">Post Detail</label>

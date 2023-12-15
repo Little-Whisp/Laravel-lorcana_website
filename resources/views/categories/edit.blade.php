@@ -5,6 +5,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h2>Edit Category</h2>
+                <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
                 <form action="{{ route('categories.update', $category->id) }}" method="post">
                     @csrf
                     @method('PUT')

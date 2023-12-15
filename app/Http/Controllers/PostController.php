@@ -21,16 +21,15 @@ class PostController extends Controller
         return view('posts.create', compact('categories'));
     }
 
+
     public function store(Request $request)
     {
         // Validate and store post
         // Implement your validation logic based on your requirements
         $request->validate([
-            'name' => 'required|max:255',
-            'detail' => 'required',
+            'title' => 'required|max:255',
             'image' => 'required|mimes:jpg,jpeg,png|max:4096',
             'category_id' => 'required|exists:categories,id',
-            'is_visible' => 'boolean',  // Assuming is_visible is a boolean field
             // Add other fields as needed
         ]);
 
@@ -39,9 +38,8 @@ class PostController extends Controller
 
         // Create a new Post instance with the validated data
         $post = new Post([
-            'name' => $request->input('name'),
-            'detail' => $request->input('detail'),
-            'image' => $imagePath,  // Save the file path, adjust if necessary
+            'title' => $request->input('name'),
+            'image' => $imagePath,
             'category_id' => $request->input('category_id'),
             'is_visible' => $request->has('is_visible'),
         ]);
@@ -49,8 +47,8 @@ class PostController extends Controller
         // Save the post to the database
         $post->save();
 
-        // Redirect back to the home page with a success message
-        return redirect()->route('home')->with('success', 'Post created successfully');
+        // Redirect back to the main page with a success message
+        return redirect()->route('posts.index')->with('success', 'Post created successfully');
     }
 
     public function edit($id)
@@ -63,26 +61,42 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         // Validate and update post
-        // Implement your validation logic based on your requirements
         $request->validate([
-            'title' => 'required|max:255',
-            'image' => 'required|mimes:jpg,jpeg,png|max:4096',
+            'title' => 'nullable|max:255',
+            'image' => 'nullable|mimes:jpg,jpeg,png|max:4096',  // Allow image to be nullable
+            'is_visible' => 'boolean',
             'category_id' => 'required|exists:categories,id',
             // Add other fields as needed
         ]);
 
         $post = Post::findOrFail($id);
-        $post->update($request->all());
 
-        return redirect()->route('home')->with('success', 'Post updated successfully');
+        // Check if the 'image' file has been provided
+        if ($request->hasFile('image')) {
+            // Handle file upload and update image path
+            $imagePath = $request->file('image')->store('post_images', 'public');
+            $post->image = $imagePath;
+        }
+
+        // Update other fields
+        $post->title = $request->input('title');
+        $post->category_id = $request->input('category_id');
+        $post->is_visible = $request->has('is_visible');
+
+        // Save the changes
+        $post->save();
+
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully');
     }
+
+
 
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return redirect()->route('home')->with('success', 'Post deleted successfully');
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }
 
     public function showAllPosts()
@@ -91,6 +105,6 @@ class PostController extends Controller
         return view('main', compact('posts'));
     }
 
-
 }
+
 
