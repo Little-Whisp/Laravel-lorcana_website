@@ -3,10 +3,9 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 mx-auto text-center">
                 <h2>All Categories</h2>
                 <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go to Home page</a>
-                <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
                 <a href="{{ route('categories.create') }}" class="btn btn-primary mt-3 ml-3">Create a new category</a>
 
                 @forelse ($categories as $category)
@@ -28,3 +27,4 @@
         </div>
     </div>
 @endsection
+

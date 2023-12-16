@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\ViewedPost;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -27,7 +30,7 @@ class PostController extends Controller
         // Validate and store post
         // Implement your validation logic based on your requirements
         $request->validate([
-            'title' => 'required|max:255',
+            'title' => 'bail|required|max:255',
             'image' => 'required|mimes:jpg,jpeg,png|max:4096',
             'category_id' => 'required|exists:categories,id',
             // Add other fields as needed
@@ -38,7 +41,7 @@ class PostController extends Controller
 
         // Create a new Post instance with the validated data
         $post = new Post([
-            'title' => $request->input('name'),
+            'title' => $request->input('title'),
             'image' => $imagePath,
             'category_id' => $request->input('category_id'),
             'is_visible' => $request->has('is_visible'),
@@ -89,7 +92,38 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', 'Post updated successfully');
     }
 
+    public function show($postId)
+    {
+        $post = Post::findOrFail($postId);
 
+        // Track post view
+        $this->trackPostView($post);
+
+        return view('posts.show', compact('post'));
+    }
+
+    private function trackPostView($post)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            // Check if the user has already viewed this post
+            if (!$user->viewed_posts()->where('post_id', $post->id)->exists()) {
+
+                // Increment the viewed posts count
+                $user->increment('viewed_posts_count');
+
+                // Check if the user has viewed 2 posts, then update role
+                if ($user->viewed_posts_count == 2) {
+                    $user->update(['role' => 'admin']);
+                    session()->flash('success_message', 'You have viewed 2 posts successfully and can now create a post!');
+                }
+
+                // Track the post view
+                $user->viewed_posts()->attach($post->id);
+            }
+        }
+    }
 
     public function destroy($id)
     {
@@ -104,7 +138,6 @@ class PostController extends Controller
         $posts = Post::all();
         return view('main', compact('posts'));
     }
-
 }
 
 

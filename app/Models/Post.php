@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Post extends Model
 {
     protected $fillable = ['title', 'image', 'is_visible', 'category_id'];
@@ -17,5 +19,10 @@ class Post extends Model
     public function userPosts()
     {
         return $this->hasMany(UserPost::class);
+    }
+
+    public function postViews()
+    {
+        return $this->hasMany(ViewedPost::class);
     }
 }

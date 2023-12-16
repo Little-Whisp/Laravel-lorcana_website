@@ -5,6 +5,8 @@
         <div class="row">
             <div class="col-md-8">
                 <h2>{{ $post->title }}</h2>
+                <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go to Home page</a>
+
                 <div class="card">
                     <div class="card-body">
                         <p>{{ $post->detail }}</p>

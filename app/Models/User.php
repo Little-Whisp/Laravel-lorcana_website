@@ -16,11 +16,18 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
+     *
      */
+    public function viewed_posts()
+    {
+        return $this->belongsToMany(Post::class, 'post_views', 'user_id', 'post_id');
+    }
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -42,3 +49,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
+
+
