@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\ViewedPost;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,9 +15,17 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+        // Retrieve all posts for admin users, including invisible ones
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            $posts = Post::get();
+        } else {
+            // For non-admin users, retrieve only visible posts
+            $posts = Post::where('is_visible', true)->get();
+        }
+
         return view('posts.index', compact('posts'));
     }
+
 
     public function create()
     {
@@ -66,7 +75,7 @@ class PostController extends Controller
         // Validate and update post
         $request->validate([
             'title' => 'nullable|max:255',
-            'image' => 'nullable|mimes:jpg,jpeg,png|max:4096',  // Allow image to be nullable
+            'image' => 'nullable|mimes:jpg,jpeg,png|max:4096', // Allow image to be nullable
             'is_visible' => 'boolean',
             'category_id' => 'required|exists:categories,id',
             // Add other fields as needed

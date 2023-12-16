@@ -7,9 +7,9 @@
                 <h2>Edit Post</h2>
                 <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
 
-                <form action="{{ route('posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
-                    @csrf
+                <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
+                    @csrf
                     <div class="form-group">
                         <label for="title">Post Title</label>
                         <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}" required>
@@ -34,7 +34,8 @@
                         </select>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="is_visible" name="is_visible" {{ $post->is_visible ? 'checked' : '' }}>
+                        <!-- Example checkbox for is_visible field -->
+                        <input type="checkbox" name="is_visible" value="1" {{ $post->is_visible ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_visible">Visible</label>
 
                     </div>

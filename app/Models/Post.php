@@ -21,6 +21,11 @@ class Post extends Model
         return $this->hasMany(UserPost::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function postViews()
     {
         return $this->hasMany(ViewedPost::class);
