@@ -4,25 +4,34 @@
         <div class="container">
             <div class="section p-4 border">
                 <a href="{{ route('home') }}" class="btn btn-primary mt-3 ml-3">Back to dashboard</a>
+
                 <div class="row">
                 <div class="col-md-8 mx-auto text-center">
                     <h2>Welcome to Lorcana's card library</h2>
-                    <div><a>You are an admin and can create/edit/delete posts and categories</a></div>
 
-                    <!-- Search bar -->
-{{--                    <form action="{{ route('posts.search') }}" method="GET" class="mb-3">--}}
-{{--                        <div class="input-group">--}}
-{{--                            <input type="text" class="form-control" placeholder="Search for posts..." name="q" value="{{ request('q') }}">--}}
-{{--                            <button type="submit" class="btn btn-primary">Search</button>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
+                    <form action="{{ route('posts.search') }}" method="GET" class="mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for posts..." name="q" value="{{ request('q') }}">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+
+                    <!-- Category filter dropdown -->
+{{--                    <label for="categoryFilter">Filter by Category:</label>--}}
+{{--                    <select id="categoryFilter" name="category">--}}
+{{--                        <option value="">All Categories</option>--}}
+{{--                        @foreach($categories as $category)--}}
+{{--                            <option value="{{ $category->id }}" {{ $categoryId == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+
                         @if (Auth::check() && Auth::user()->role === 'admin')
-                            <!-- Display the "Create Post" button for admins -->
+                        <div><a>You are an admin and can create/edit/delete posts and categories</a></div>
+                        <!-- Display the "Create Post" button for admins -->
                             <a href="{{ route('posts.create') }}" class="btn btn-primary mt-3 ml-3">Create your own lorcana card</a>
                             <a href="{{ route('categories.index') }}" class="btn btn-primary mt-3 ml-3">Go to Categories</a>
                     @endif
             </div>
-
                 <div class="container">
                         <div class="row">
                             @forelse ($posts as $post)

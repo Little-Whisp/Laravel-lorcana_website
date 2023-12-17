@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         // Retrieve all posts for admin users, including invisible ones
         if (Auth::check() && Auth::user()->role === 'admin') {
@@ -23,7 +23,18 @@ class PostController extends Controller
             $posts = Post::where('is_visible', true)->get();
         }
 
-        return view('posts.index', compact('posts'));
+        // Retrieve all categories
+        $categories = Category::all();
+
+        // Retrieve the category ID from the request
+        $categoryId = $request->input('category');
+
+        // Retrieve posts based on the selected category or get all posts
+        $posts = $categoryId
+            ? Category::findOrFail($categoryId)->posts
+            : Post::get();
+
+        return view('posts.index', compact('posts', 'categories', 'categoryId'));
     }
 
 
@@ -144,6 +155,27 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }
+
+    public function search(Request $request)
+    {
+        // Retrieve the search query from the request
+        $query = $request->input('q');
+
+        // Perform the search logic (adjust this based on your requirements)
+        $results = Post::where('title', 'like', "%{$query}%")->get();
+
+        // Pass the results to the view
+        return view('posts.search', compact('results'));
+    }
+
+    public function filterByCategory(Category $category)
+    {
+        $posts = $category->posts()->where('is_visible', true)->get();
+
+        // You may want to load the view or return a JSON response, depending on your requirements
+        return view('posts.index', compact('posts'));
+    }
+
 
     public function showAllPosts()
     {

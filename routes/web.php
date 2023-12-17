@@ -40,6 +40,7 @@ Route::get('/posts/{id}', 'PostController@show');
 Route::get('/posts/{id}/edit', 'PostController@edit')->name('posts.edit');
 Route::put('/posts/{id}', 'PostController@update')->name('posts.update');
 
+Route::get('/posts/search', [PostController::class, 'search'])->name('posts.search');
 
 
 // User Posts Routes
@@ -47,6 +48,8 @@ Route::resource('user-posts', UserPostController::class);
 
 // Categories Routes
 Route::resource('categories', CategoryController::class);
+Route::get('posts/category/{category}', [PostController::class, 'filterByCategory'])->name('posts.category');
+
 
 // Authentication Routes
 Auth::routes();
