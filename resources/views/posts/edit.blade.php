@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8 mx-auto">
+                <div class="section p-4 border">
                 <h2>Edit Post</h2>
                 <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
 
@@ -41,6 +42,7 @@
                     <br>
                     <button type="submit" class="btn btn-primary">Update Post</button>
                 </form>
+                </div>
             </div>
         </div>
     </div>

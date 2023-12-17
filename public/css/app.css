@@ -3612,11 +3612,11 @@ textarea.form-control-lg {
   padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
   clear: both;
   font-weight: 400;
-  color: var(--bs-dropdown-link-color);
+  color: #ffffff; /* Light text color */
   text-align: inherit;
   text-decoration: none;
   white-space: nowrap;
-  background-color: transparent;
+  background-color: #121212; /* Dark background color */
   border: 0;
   border-radius: var(--bs-dropdown-item-border-radius, 0);
 }
@@ -3788,7 +3788,7 @@ textarea.form-control-lg {
   padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
   font-size: var(--bs-nav-link-font-size);
   font-weight: var(--bs-nav-link-font-weight);
-  color: var(--bs-nav-link-color);
+  color: #ffffff; /* Light text color */
   text-decoration: none;
   background: none;
   border: 0;
@@ -3949,7 +3949,8 @@ textarea.form-control-lg {
   padding-bottom: var(--bs-navbar-brand-padding-y);
   margin-right: var(--bs-navbar-brand-margin-end);
   font-size: var(--bs-navbar-brand-font-size);
-  color: var(--bs-navbar-brand-color);
+  color: #ffffff; /* Light text color */
+
   text-decoration: none;
   white-space: nowrap;
 }
@@ -3974,6 +3975,8 @@ textarea.form-control-lg {
   color: var(--bs-navbar-active-color);
 }
 .navbar-nav .dropdown-menu {
+  background-color: #121212; /* Dark background color */
+  color: #ffffff; /* Light text color */
   position: static;
 }
 
@@ -4389,6 +4392,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+  border-radius: 10px; /* Set the border radius to 10 pixels */
   color: var(--bs-card-color);
 }
 
@@ -8774,7 +8778,9 @@ textarea.form-control-lg {
 
 .bg-white {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #121212; /* Dark background color */
+  color: #ffffff; /* Light text color */
+
 }
 
 .bg-body {
@@ -11977,3 +11983,56 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+/* public/css/dark-mode.css */
+body, html {
+    background-image: url('https://cdn.discordapp.com/attachments/372804664053334016/1185752368726429817/sdasdasdadasdads.png?ex=6590c0f2&is=657e4bf2&hm=0c13c2ed6b3f983fabe2e9779e0b808be01476df4206486d136e1a14b92b4cf6&');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff; /* Light text color */
+    /*margin:300px;*/
+}
+
+.card {
+  background-color: #1e1e1e; /* Dark card background color */
+  color: #ffffff; /* Light text color */
+  border-radius: 10px; /* Set the border radius to 10 pixels */
+}
+
+.section {
+  background-color: #1e1e1e; /* Dark card background color */
+  color: #ffffff; /* Light text color */
+  border-radius: 10px; /* Set the border radius to 10 pixels */
+}
+
+img, svg{
+  border-radius: 20px; /* Set the border radius to 10 pixels */
+
+
+}
+
+
+.card-header {
+  background-color: #2c2c2c; /* Dark card header background color */
+  color: #ffffff; /* Light text color */
+}
+
+.modal-header{
+  background-color: #2c2c2c; /* Dark card header background color */
+  color: #ffffff; /* Light text color */
+}
+
+
+.modal-body{
+  background-color: #2c2c2c; /* Dark card header background color */
+  color: #ffffff; /* Light text color */
+}
+
+.modal-footer{
+  background-color: #2c2c2c; /* Dark card header background color */
+  color: #ffffff; /* Light text color */
+}
+
+
+

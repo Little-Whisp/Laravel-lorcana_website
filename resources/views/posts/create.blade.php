@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <div class="section p-4 border">
         <div class="row align-items-center">
             <div class="col-md-8 mx-auto">
                 <h2>Create a New Post</h2>
@@ -38,5 +39,6 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection

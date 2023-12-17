@@ -2,11 +2,12 @@
 
 @section('content')
         <div class="container">
-            <a href="{{ route('home') }}" class="btn btn-primary mt-3 ml-3">Back to dashboard</a>
-            <div class="row">
+            <div class="section p-4 border">
+                <a href="{{ route('home') }}" class="btn btn-primary mt-3 ml-3">Back to dashboard</a>
+                <div class="row">
                 <div class="col-md-8 mx-auto text-center">
-
-                    <h2>Lorcana cards library</h2>
+                    <h2>Welcome to Lorcana's card library</h2>
+                    <div><a>You are an admin and can create/edit/delete posts and categories</a></div>
 
                     <!-- Search bar -->
 {{--                    <form action="{{ route('posts.search') }}" method="GET" class="mb-3">--}}
@@ -15,16 +16,14 @@
 {{--                            <button type="submit" class="btn btn-primary">Search</button>--}}
 {{--                        </div>--}}
 {{--                    </form>--}}
-
-                    <div>
                         @if (Auth::check() && Auth::user()->role === 'admin')
                             <!-- Display the "Create Post" button for admins -->
-                            <div><a>You are an admin and can create/edit/delete posts and categories</a></div>
                             <a href="{{ route('posts.create') }}" class="btn btn-primary mt-3 ml-3">Create your own lorcana card</a>
                             <a href="{{ route('categories.index') }}" class="btn btn-primary mt-3 ml-3">Go to Categories</a>
-                        @endif
-                    </div>
-                    <div class="container">
+                    @endif
+            </div>
+
+                <div class="container">
                         <div class="row">
                             @forelse ($posts as $post)
                                 <div class="col-md-4 mb-4">
@@ -37,7 +36,9 @@
                                             </div>
                                             <p>Category: {{ optional($post->category)->name }}</p>
                                             <p>Details: {{ $post->detail }}</p>
+                                            @if (Auth::check() && Auth::user()->role === 'admin')
                                             <p>Visibility: {{ $post->is_visible ? 'Visible' : 'Not Visible' }}</p>
+                                            @endif
 
                                             @if (!Auth::check())
                                                 <!-- Display the "Details" button for non-logged-in users -->
