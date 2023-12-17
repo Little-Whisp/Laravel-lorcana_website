@@ -29,10 +29,22 @@ class PostController extends Controller
         // Retrieve the category ID from the request
         $categoryId = $request->input('category');
 
-        // Retrieve posts based on the selected category or get all posts
-        $posts = $categoryId
-            ? Category::findOrFail($categoryId)->posts
-            : Post::get();
+        // Initialize the query based on user role
+        $query = Auth::check() && Auth::user()->role === 'admin'
+            ? Post::query()
+            : Post::where('is_visible', true);
+
+        // If the user is authenticated, retrieve posts based on the selected category or get all posts
+        if (Auth::check()) {
+            $posts = $categoryId
+                ? $query->whereHas('categories', function ($query) use ($categoryId) {
+                    $query->where('categories.id', $categoryId);
+                })->get()
+                : $query->get();
+        } else {
+            // If the user is not authenticated, only retrieve visible posts
+            $posts = Post::where('is_visible', true)->get();
+        }
 
         return view('posts.index', compact('posts', 'categories', 'categoryId'));
     }

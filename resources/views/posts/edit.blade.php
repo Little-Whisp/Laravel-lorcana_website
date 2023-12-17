@@ -40,7 +40,7 @@
                         <label class="form-check-label" for="is_visible">Visible</label>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Update Post</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
                 </div>
             </div>
