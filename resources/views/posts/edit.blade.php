@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8">
+        <div class="row align-items-center">
+            <div class="col-md-8 mx-auto">
                 <h2>Edit Post</h2>
                 <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
 
@@ -37,7 +37,6 @@
                         <!-- Example checkbox for is_visible field -->
                         <input type="checkbox" name="is_visible" value="1" {{ $post->is_visible ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_visible">Visible</label>
-
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Update Post</button>

@@ -3,7 +3,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto text-center">
+            <div class="col-md-8 mx-auto text-center" style="width: 50%">
                 <h2>All Categories</h2>
                 <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go to Home page</a>
 

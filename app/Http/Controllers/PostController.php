@@ -40,6 +40,7 @@ class PostController extends Controller
         // Implement your validation logic based on your requirements
         $request->validate([
             'title' => 'bail|required|max:255',
+            'detail' => 'bail|required|max:255',
             'image' => 'required|mimes:jpg,jpeg,png|max:4096',
             'category_id' => 'required|exists:categories,id',
             // Add other fields as needed
@@ -51,6 +52,7 @@ class PostController extends Controller
         // Create a new Post instance with the validated data
         $post = new Post([
             'title' => $request->input('title'),
+            'detail' => $request->input('detail'),
             'image' => $imagePath,
             'category_id' => $request->input('category_id'),
             'is_visible' => $request->has('is_visible'),
@@ -75,6 +77,7 @@ class PostController extends Controller
         // Validate and update post
         $request->validate([
             'title' => 'nullable|max:255',
+            'detail' => 'nullable|max:255',
             'image' => 'nullable|mimes:jpg,jpeg,png|max:4096', // Allow image to be nullable
             'is_visible' => 'boolean',
             'category_id' => 'required|exists:categories,id',

@@ -12,6 +12,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('image');
+            $table->string('detail');
             $table->boolean('is_visible')->default(true);
             $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();

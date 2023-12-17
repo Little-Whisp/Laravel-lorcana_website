@@ -2,10 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8">
+        <a href="{{ route('categories.index') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
+
+        <div class="row align-items-center">
+            <div class="col-md-8 mx-auto">
                 <h2>Edit Category</h2>
-                <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go back</a>
                 <form action="{{ route('categories.update', $category->id) }}" method="post">
                     @csrf
                     @method('PUT')
