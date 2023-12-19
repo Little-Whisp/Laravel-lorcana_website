@@ -11,17 +11,19 @@
                 <div class="card">
                     <div class="card-body">
                         <p>{{ $post->detail }}</p>
-                        <p>Category: {{ $post->category->name }}</p>
-                        <p>Visibility: {{ $post->is_visible ? 'Visible' : 'Not Visible' }}</p>
+                        <p>Categories:
+                            @forelse ($post->categories as $category)
+                                {{ $category->name }}
+                                @if (!$loop->last)
+                                    ,
+                                @endif
+                            @empty
+                                No categories available.
+                        @endforelse
+                        <p>Created by: {{ ($post->user)->name }}</p>
                     </div>
                 </div>
                 <br>
-                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit</a>
-                <form action="{{ route('posts.destroy', $post->id) }}" method="post" style="display: inline-block;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
-                </form>
             </div>
         </div>
     </div>

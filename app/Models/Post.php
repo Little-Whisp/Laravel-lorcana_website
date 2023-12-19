@@ -11,9 +11,10 @@ class Post extends Model
 {
     protected $fillable = ['title', 'image', 'detail', 'is_visible', 'category_id'];
 
-    public function category()
+// Post.php
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function userPosts()
@@ -23,9 +24,8 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
-
     public function postViews()
     {
         return $this->hasMany(ViewedPost::class);

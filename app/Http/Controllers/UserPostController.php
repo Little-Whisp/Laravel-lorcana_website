@@ -1,67 +1,66 @@
 <?php
 
-// app/Http/Controllers/UserPostController.php
-
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\UserPost;
+use Illuminate\Support\Facades\Hash;
 
 class UserPostController extends Controller
 {
-    public function index()
-    {
-        $userPosts = UserPost::all(); // You might want to get user-specific posts
-        return view('userposts.index', compact('userPosts'));
+    public function index(){
+        $users = User::all();
+        return view('users')->with('users', $users);
     }
 
-    public function create()
+    public function edit()
     {
-        return view('userposts.create');
+        $user = auth()->user();
+        return view('user.edit', compact('user'));
     }
 
-    public function store(Request $request)
+    public function makeAdmin(User $user)
     {
-        // Validate and store user post
-        // Implement your validation logic based on your requirements
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            // Add other fields as needed
-        ]);
+        $user->role = 'admin';
+        $user->save();
+        session()->flash('alert', 'User successfully made administrator.');
 
-        UserPost::create($request->all());
-
-        return redirect()->route('userposts.index')->with('success', 'User post created successfully');
+        return redirect(route('users'));
     }
 
-    public function edit($id)
+    public function verifyUser(User $user)
     {
-        $userPost = UserPost::findOrFail($id);
-        return view('userposts.edit', compact('userPost'));
+        $user->verified_status = 1;
+        $user->save();
+        session()->flash('alert', 'Your account is now verified, you can now add new artworks using the button below!');
+
+        return redirect(route('artworks.index'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        // Validate and update user post
-        // Implement your validation logic based on your requirements
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            // Add other fields as needed
-        ]);
-
-        $userPost = UserPost::findOrFail($id);
-        $userPost->update($request->all());
-
-        return redirect()->route('userposts.index')->with('success', 'User post updated successfully');
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:users',
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'exists:users'],
+                'password' => ['required', 'string', 'min:8'],
+            ]);
+        $user = User::find($validated['id']);
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = Hash::make($validated['password']);
+        $user->save();
+        return redirect(route('users.edit', $user->id));
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $userPost = UserPost::findOrFail($id);
-        $userPost->delete();
-
-        return redirect()->route('userposts.index')->with('success', 'User post deleted successfully');
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:users'
+            ]);
+        User::destroy($validated);
+        return redirect('/home');
     }
 }
