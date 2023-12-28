@@ -1,8 +1,10 @@
 @extends('layouts.app')
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="mb-4 col-6">
+
                 <h2>List of Posts</h2>
 
                 <div class="input-group-lg col col-auto">
@@ -16,6 +18,7 @@
                     </form>
                     <br>
                 </div>
+
                 <h3>Search Results: </h3>
                 @foreach($posts as $post)
                     <div class="card">
@@ -36,9 +39,8 @@
                                         <btn class="btn btn-primary"><a class="link page-link text-white"
                                                                         href="/categories/{{$category->id}}">{{$category->name}}</a>
                                         </btn>
-                                        @if($post->categories->count() > 1)
-
-                                        @endif
+                                            @if($post->categories->count() > 1)
+                                            @endif
                                     @endforeach
                                 </h3>
                             </div>

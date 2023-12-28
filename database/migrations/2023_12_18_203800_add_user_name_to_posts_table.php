@@ -13,8 +13,9 @@ class AddUserNameToPostsTable extends Migration
      */
     public function up()
     {
+        // Add the 'user_name' column to the 'posts' table
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('user_name')->nullable();
+            $table->string('user_name')->nullable(); // String column for storing user names (nullable)
         });
     }
 
@@ -25,8 +26,6 @@ class AddUserNameToPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-        });
+
     }
 }

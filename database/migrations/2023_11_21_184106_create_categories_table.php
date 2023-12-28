@@ -13,11 +13,12 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
+        // Create the 'categories' table with specified columns
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Auto-incremental primary key
             $table->string('name'); // Name of the category
             $table->text('description')->nullable(); // Description of the category (optional)
-            $table->timestamps();
+            $table->timestamps(); // Timestamps for created_at and updated_at columns
         });
     }
 
@@ -28,6 +29,7 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
+        // Drop the 'categories' table if it exists
         Schema::dropIfExists('categories');
     }
 }

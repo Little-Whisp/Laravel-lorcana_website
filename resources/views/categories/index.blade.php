@@ -18,6 +18,7 @@
 
                             @if (Auth::check() && Auth::user()->role === 'admin')
                             <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary">Edit</a>
+
                             <form action="{{ route('categories.destroy', $category->id) }}" method="post" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
@@ -27,9 +28,11 @@
 
                         </div>
                     </div>
+
                 @empty
                     <p>No categories found.</p>
                 @endforelse
+
             </div>
         </div>
     </div>

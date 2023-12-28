@@ -46,7 +46,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return $this->loggedOut($request) ?: redirect('/posts');
+        return $this->loggedOut($request) ?: redirect('/');
     }
 
 }

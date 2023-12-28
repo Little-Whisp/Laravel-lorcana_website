@@ -4,22 +4,29 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <!-- Display success alert if present in session -->
                 @if (session('alert'))
                     <div class="alert alert-success" role="alert">
                         {{ session('alert') }}
                     </div>
                 @endif
+
                 <div class="card">
                     <div class="card-header custom-header">
+
                         <h1>Edit Profile</h1>
+
                     </div>
                     <div class="card-body">
+                        <!-- Edit profile form -->
                         <form action="/users/{{$user->id}}" method="POST">
                             @csrf
                             <input id="id"
                                    name="id"
                                    type="hidden"
-                                   value="{{$user->id}}}">
+                                   value="{{$user->id}}">
+
+                            <!-- Input fields for name, email, and password -->
                             <label for="name">Name: </label>
                             <input id="name"
                                    name="name"
@@ -49,6 +56,8 @@
                             @error("detail")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+
+                            <!-- Display validation errors -->
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -58,10 +67,14 @@
                                     </ul>
                                 </div>
                             @endif
+
                             <br>
+                            <!-- Submit button for form -->
                             <input class="btn btn-primary" type="submit" value="Save changes">
                         </form>
                         <br>
+
+                        <!-- Display account verification information -->
                         <div>
                             Verification:
                             @if (Auth::check() && Auth::user()->role === 'admin')
@@ -74,29 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                @can('delete', $user)
-                    <div class="card">
-                        <div class="card-header bg-warning">
-                            <h1>Delete account</h1>
-                        </div>
-                        <div class="card-body">
-                            <h5>Are you sure you want to delete your account, {{$user->name}}? We will miss you..
-                                :(</h5>
-                            <br>
-                            <form action="{{route('users.destroy', $user->id)}}" method="POST">
-                                @method('DELETE')
-                                @csrf
-
-                                <input id="id"
-                                       name="id"
-                                       type="hidden"
-                                       value="{{$user->id}}">
-                                <input type="submit" value="Yes, I'm sure" class="btn btn-warning">
-                            </form>
-                        </div>
-                    </div>
-                @endcan
             </div>
         </div>
+    </div>
 @endsection

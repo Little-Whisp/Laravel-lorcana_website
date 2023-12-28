@@ -5,7 +5,9 @@
         <div class="section p-4 border">
         <div class="row align-items-center">
             <div class="col-md-8 mx-auto">
+
                 <h2>{{ $post->title }}</h2>
+
                 <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go to Home page</a>
 
                 <div class="card">
@@ -21,6 +23,7 @@
                                 No categories available.
                         @endforelse
                         <p>Created by: {{ ($post->user)->name }}</p>
+
                     </div>
                 </div>
                 <br>

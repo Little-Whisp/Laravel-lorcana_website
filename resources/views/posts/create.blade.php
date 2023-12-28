@@ -5,7 +5,9 @@
         <div class="section p-4 border">
         <div class="row align-items-center">
             <div class="col-md-8 mx-auto">
+
                 <h2>Create a New Post</h2>
+
                 <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3 ml-3">Go to Home page</a>
 
                 <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
@@ -34,7 +36,9 @@
                         <input type="checkbox" class="form-check-input" id="is_visible" name="is_visible" checked>
                         <label class="form-check-label" for="is_visible">Visible</label>
                     </div>
+
                     <br>
+
                     <button type="submit" class="btn btn-primary">Create Post</button>
                 </form>
             </div>
