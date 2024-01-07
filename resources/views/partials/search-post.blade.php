@@ -39,8 +39,16 @@
 
         categoryCheckboxes.forEach(function (checkbox) {
             checkbox.addEventListener('change', function () {
+                // Uncheck other checkboxes
+                categoryCheckboxes.forEach(function (otherCheckbox) {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+                // Submit the form
                 form.submit();
             });
         });
     });
 </script>
+

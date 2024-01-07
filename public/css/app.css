@@ -12340,26 +12340,23 @@ img, svg {
 }
 
 .custom-btn-outline-success {
-    border-radius: 0 10px 10px 0; /* Adjust the pixel values as needed */
-    /* Add other styles as needed */
-    padding: 10px 15px; /* Adjust the padding as needed */
-    background-color: #720ce0; /* Change #00ff00 to the desired background color */
-    border: 1px solid #720ce0; /* Adjust the border color */
-    color: #ffffff; /* Adjust the text color */
-    cursor: pointer;
-    /* Add any additional styles as needed */
+  border-radius: 0 10px 10px 0; /* Adjust the pixel values as needed */
+  /* Add other styles as needed */
+  padding: 10px 15px; /* Adjust the padding as needed */
+  background-color: #720ce0; /* Change #00ff00 to the desired background color */
+  border: 1px solid #720ce0; /* Adjust the border color */
+  color: #ffffff; /* Adjust the text color */
+  cursor: pointer;
+  /* Add any additional styles as needed */
 }
 
 .category-label {
-    border-radius: 10px 0 0 10px; /* Adjust the pixel values as needed */
-    /* Add other styles as needed */
-    padding: 10px 15px; /* Adjust the padding as needed */
-    background-color: #720ce0; /* Change #00ff00 to the desired background color */
-    border: 1px solid #720ce0; /* Adjust the border color */
-    color: #ffffff; /* Adjust the text color */
-    cursor: pointer;
-    /* Add any additional styles as needed */
+  border-radius: 10px 0 0 10px; /* Adjust the pixel values as needed */
+  /* Add other styles as needed */
+  padding: 10px 15px; /* Adjust the padding as needed */
+  background-color: #720ce0; /* Change #00ff00 to the desired background color */
+  border: 1px solid #720ce0; /* Adjust the border color */
+  color: #ffffff; /* Adjust the text color */
+  cursor: pointer;
+  /* Add any additional styles as needed */
 }
-
-
-
