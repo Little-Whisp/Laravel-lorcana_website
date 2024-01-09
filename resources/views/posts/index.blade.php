@@ -8,20 +8,26 @@
                 <a href="{{ route('home') }}" class="btn btn-primary mt-3 ml-3">Back to dashboard</a>
             @endif
 
-                <div class="row">
-                <div class="col-md-8 mx-auto text-center">
-
+                <div class="text-center mt-4">
                     <h2>Welcome to Lorcana's card library</h2>
+                </div>
+
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
 
                     @if (Auth::check() && Auth::user()->role === 'admin')
 
-                    <div class="input-group-lg col col-auto">
-                        @include('partials.search-post')
-                    </div>
+                        <br>
+
+                        <div class="input-group-lg col col-auto">
+                            @include('partials.search-post')
+                        </div>
+
 
                         <div><a>You are an admin and can create/edit/delete posts and categories</a></div>
                         <!-- Display the "Create Post" button for admins -->
-                        <a href="{{ route('posts.create') }}" class="btn btn-primary mt-3 ml-3">Create your own lorcana card</a>
+                        <a href="{{ route('posts.create') }}" class="btn btn-primary mt-3 ml-3">Create your own lorcana
+                            card</a>
                         <a href="{{ route('categories.index') }}" class="btn btn-primary mt-3 ml-3">Go to Categories</a>
                     @endif
 
@@ -31,7 +37,7 @@
 
                 <div class="container">
                     <div class="row">
-                            @forelse ($posts ?? [] as $post)
+                        @forelse ($posts ?? [] as $post)
                             <div class="col-md-4 mb-4">
                                 <div class="card">
                                     <div class="card-header">{{ $post->title }}</div>
@@ -61,18 +67,19 @@
 
                                             @if (Auth::check() && Auth::user()->role === 'admin')
                                                 @if (Auth::user()->id === $post->user_id )
-                                                <!-- Display additional action buttons for admins -->
-                                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit</a>
+                                                    <!-- Display additional action buttons for admins -->
+                                                    <a href="{{ route('posts.edit', $post->id) }}"
+                                                       class="btn btn-primary">Edit</a>
 
-                                                <form action="{{ route('posts.destroy', $post->id) }}" method="post"
-                                                      style="display: inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger"
-                                                            onclick="return confirm('Are you sure you want to delete this category?')">
-                                                        Delete
-                                                    </button>
-                                                </form>
+                                                    <form action="{{ route('posts.destroy', $post->id) }}" method="post"
+                                                          style="display: inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"
+                                                                onclick="return confirm('Are you sure you want to delete this category?')">
+                                                            Delete
+                                                        </button>
+                                                    </form>
 
                                                 @endif
                                             @endif
@@ -85,8 +92,8 @@
                                                 <div class="modal-content">
 
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="postModalLabel{{ $post->id }}">{{ $post->title }}</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title"
+                                                            id="postModalLabel{{ $post->id }}">{{ $post->title }}</h5>
                                                     </div>
 
                                                     <div class="modal-body">
@@ -102,7 +109,7 @@
                                                                         {{ $category->name }}
                                                                     @empty
                                                                         No categories available.
-                                                                @endforelse                                                                <p>Details: {{ $post->detail }}</p>
+                                                                @endforelse <p>Details: {{ $post->detail }}</p>
                                                                 <p>
 
                                                             </div>
