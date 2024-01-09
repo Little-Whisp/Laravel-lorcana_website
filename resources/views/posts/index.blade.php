@@ -13,11 +13,12 @@
 
                     <h2>Welcome to Lorcana's card library</h2>
 
+                    @if (Auth::check() && Auth::user()->role === 'admin')
+
                     <div class="input-group-lg col col-auto">
                         @include('partials.search-post')
                     </div>
 
-                    @if (Auth::check() && Auth::user()->role === 'admin')
                         <div><a>You are an admin and can create/edit/delete posts and categories</a></div>
                         <!-- Display the "Create Post" button for admins -->
                         <a href="{{ route('posts.create') }}" class="btn btn-primary mt-3 ml-3">Create your own lorcana card</a>

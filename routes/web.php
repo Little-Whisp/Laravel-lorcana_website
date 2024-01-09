@@ -42,6 +42,7 @@ Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{id}/edit', 'PostController@edit')->name('posts.edit');
 Route::put('/posts/{id}', 'PostController@update')->name('posts.update');
 Route::get('/posts/{id}', 'PostController@show');
+
 Route::post('/posts/search', [PostController::class, 'search'])->name('posts.search');
 
 // User Posts Route
